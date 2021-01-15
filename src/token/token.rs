@@ -1,32 +1,32 @@
-mod token{
-    type TokenType<'a> = &'a str;
+pub mod token{
+    pub type TokenType<'a> = &'a str;
 
-    struct Token<'a>{
-        token: TokenType<'a>,
-        literal: String
+    pub struct Token<'a>{
+        pub token: TokenType<'a>,
+        pub literal: String
     }
 
-    const ILLEGAL: &str = "ILLEGAL";
-    const EOF: &str = "EOF";
+    pub const ILLEGAL: &str = "ILLEGAL";
+    pub const EOF: &str = "EOF";
 
     // Identifiers + literals
-    const IDENT: &str = "IDENT";
-    const INT: &str = "INT";
+    pub const IDENT: &str = "IDENT";
+    pub const INT: &str = "INT";
 
     // Operators
-    const ASSIGN: &str = "=";
-    const PLUS: &str = "+";
+    pub const ASSIGN: &str = "=";
+    pub const PLUS: &str = "+";
     
     // Delimiters
-    const COMMA: &str = ",";
-    const SEMICOLON: &str = ";";
+    pub const COMMA: &str = ",";
+    pub const SEMICOLON: &str = ";";
 
-    const LPAREN: &str = "(";
-    const RPAREN: &str = ")";
-    const LBRACE: &str = "{";
-    const RBRACE: &str = "}";
+    pub const LPAREN: &str = "(";
+    pub const RPAREN: &str = ")";
+    pub const LBRACE: &str = "{";
+    pub const RBRACE: &str = "}";
 
     // Keywords
-    const FUNCTION: &str = "FUNCTION";
-    const LET: &str = "LET";
+    pub const FUNCTION: &str = "FUNCTION";
+    pub const LET: &str = "LET";
 }
