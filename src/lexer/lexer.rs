@@ -1,9 +1,9 @@
 mod lexer{
     struct Lexer<'a>{
         input: Option<&'a str>,
-        position: Option<u32>,
-        read_position: Option<u32>,
-        chr: Option<char>
+        position: Option<u8>,
+        read_position: Option<u8>,
+        chr: Option<u8>
     }
 
     impl<'a> Lexer<'a>{
@@ -16,7 +16,15 @@ mod lexer{
             }
         }
 
-        fn read_char(self){
+        fn read_char(&mut self){
+            if self.read_position.unwrap() >= self.input.unwrap().len() as u8{
+                self.chr = Some(0);
+            }
+            else{
+                self.chr = Some(self.input.unwrap().as_bytes()[self.read_position.unwrap() as usize]);
+            }
+            self.position = self.read_position;
+            self.read_position = Some(self.read_position.unwrap() + 1);
         }
     }
 
