@@ -15,7 +15,7 @@ mod lexer{
                 input: Some(input),
                 position: Some(0),
                 read_position: Some(1),
-                chr: None
+                chr: Some(input.as_bytes().to_owned()[0])
             }
         }
 
@@ -30,7 +30,7 @@ mod lexer{
             self.read_position = Some(self.read_position.unwrap() + 1);
         }
 
-        fn next_token(&self) -> token::Token{
+        pub fn next_token(&self) -> token::Token{
             let current_token = self.chr.unwrap();
             let token_as_str = str::from_utf8(&[current_token]).unwrap().to_owned();
             let borw_token = &*token_as_str;
@@ -69,7 +69,7 @@ mod lexer{
                 },
                 _ => token::Token{
                     token: token::EOF,
-                    literal: String::from(token_as_str)
+                    literal: String::from("")
                 }
 
             };
@@ -80,6 +80,20 @@ mod lexer{
     #[cfg(test)]
     mod test{
         use super::*;
+        #[test]
+        fn test_next_token(){
+            let input = "=+{},;()";
+            let expected_token = vec!(token::IDENT, token::PLUS, token::LBRACE, token::RBRACE, token::COMMA, token::SEMICOLON, token::LPAREN, token::RPAREN, token::EOF);
+            let mut lexer = Lexer::new(input);
+            for index in input.char_indices(){
+                let expected = token::Token{token: expected_token[index.0], literal: String::from(index.1)};
+                let next_tok = lexer.next_token();
+
+                assert_eq!(expected.token, next_tok.token);
+                assert_eq!(expected.literal, next_tok.literal);
+                lexer.read_char();
+            }
+        }
 
     }
 }
