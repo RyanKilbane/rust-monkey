@@ -1,8 +1,9 @@
 pub mod token{
+    use std::collections::HashMap;
     pub type TokenType<'a> = &'a str;
 
-    pub struct Token<'a>{
-        pub token: TokenType<'a>,
+    pub struct Token{
+        pub token: String,
         pub literal: String
     }
 
@@ -29,4 +30,18 @@ pub mod token{
     // Keywords
     pub const FUNCTION: &str = "FUNCTION";
     pub const LET: &str = "LET";
+
+    pub fn ident_lookup(lookup: &str) -> String{
+        let mut keyword_map: HashMap<&str, &str> = HashMap::new();
+        keyword_map.insert("fn", FUNCTION);
+        keyword_map.insert("let", LET);
+        if keyword_map.contains_key(lookup){
+            keyword_map.get(lookup).unwrap().to_owned().to_string()
+        }
+        else{
+            IDENT.to_owned().to_string()
+        }
+
+    }
+
 }
