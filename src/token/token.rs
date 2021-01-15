@@ -1,8 +1,8 @@
 mod token{
-    type TokenType = String;
+    type TokenType<'a> = &'a str;
 
-    struct Token{
-        token: TokenType,
+    struct Token<'a>{
+        token: TokenType<'a>,
         literal: String
     }
 
