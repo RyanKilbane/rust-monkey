@@ -1,7 +1,8 @@
 pub mod token{
     use std::collections::HashMap;
     pub type TokenType<'a> = &'a str;
-
+    
+    #[derive(Debug)]
     pub struct Token{
         pub token: String,
         pub literal: String
