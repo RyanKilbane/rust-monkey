@@ -44,6 +44,30 @@ pub mod lexer{
                     token: token::PLUS.to_owned(),
                     literal: String::from(token_as_str)
                 },
+                "!" => token::Token{
+                    token: token::BANG.to_owned(),
+                    literal: String::from(token_as_str)
+                },
+                "*" => token::Token{
+                    token: token::ASTERISK.to_owned(),
+                    literal: String::from(token_as_str)
+                },
+                "-" => token::Token{
+                    token: token::MINUS.to_owned(),
+                    literal: String::from(token_as_str)
+                },
+                "/" => token::Token{
+                    token: token::SLASH.to_owned(),
+                    literal: String::from(token_as_str)
+                },
+                "<" => token::Token{
+                    token: token::LT.to_owned(),
+                    literal: String::from(token_as_str)
+                },
+                ">" => token::Token{
+                    token: token::GT.to_owned(),
+                    literal: String::from(token_as_str)
+                },
                 "," => token::Token{
                     token: token::COMMA.to_owned(),
                     literal: String::from(token_as_str)
@@ -125,6 +149,10 @@ pub mod lexer{
 
         fn read_ident(&mut self) -> String{
             let position = self.position.unwrap() as usize;
+            // TODO (BUG FIX): Notice that given a 2 char word read_char will be called twice
+            // we only want it to be called once so that on the final call, the current read
+            // possition will be on the final letter in the char, ie. we want it to be called 
+            // len - 1 times
             while Lexer::is_letter(&self.chr.unwrap()){
                 self.read_char()
             }
@@ -267,6 +295,26 @@ pub mod lexer{
             assert_eq!(token::EOF, next_tok.token);
             assert_eq!("\u{0}", next_tok.literal);
             lexer.read_char();
+        }
+
+        #[test]
+        fn test_arbitary_string(){
+            let input = "!>/*?<";
+            let mut lexer = Lexer::new(input);
+            let expected_token = vec!(token::BANG, token::GT, token::SLASH, token::ASTERISK, token::ILLEGAL, token::LT);
+            for index in input.char_indices(){
+                let expected = token::Token{token: expected_token[index.0].to_string(), literal: String::from(index.1)};
+                println!("{:?}", expected);
+                let next_tok = lexer.next_token();
+
+                assert_eq!(expected.token, next_tok.token);
+                assert_eq!(expected.literal, next_tok.literal);
+                lexer.read_char();
+            }
+            let next_tok = lexer.next_token();
+            println!("{:?}", next_tok);
+            assert_eq!(token::EOF, next_tok.token);
+            assert_eq!("\u{0}", next_tok.literal)
         }
 
     }

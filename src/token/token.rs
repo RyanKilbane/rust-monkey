@@ -17,6 +17,14 @@ pub mod token{
     // Operators
     pub const ASSIGN: &str = "=";
     pub const PLUS: &str = "+";
+    pub const GT: &str = ">";
+    pub const LT: &str = "<";
+    pub const MINUS: &str = "-";
+    pub const ASTERISK: &str = "*";
+    pub const BANG: &str = "!";
+    pub const SLASH: &str = "/";
+    
+
     
     // Delimiters
     pub const COMMA: &str = ",";
