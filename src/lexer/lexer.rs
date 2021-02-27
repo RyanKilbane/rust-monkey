@@ -40,61 +40,103 @@ pub mod lexer{
             let token_as_str = str::from_utf8(&[current_token]).unwrap().to_owned();
             let borw_token = &*token_as_str;
             let matched_token = match borw_token{
-                "=" => token::Token{
-                    token: token::ASSIGN.to_owned(),
-                    literal: token_as_str
+                "=" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::ASSIGN.to_owned(),
+                        literal: token_as_str
+                    }
                 },
-                "+" => token::Token{
-                    token: token::PLUS.to_owned(),
-                    literal: String::from(token_as_str)
+                "+" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::PLUS.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "!" => token::Token{
-                    token: token::BANG.to_owned(),
-                    literal: String::from(token_as_str)
+                "!" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::BANG.to_owned(),
+                        literal: String::from(token_as_str)
+                }
                 },
-                "*" => token::Token{
-                    token: token::ASTERISK.to_owned(),
-                    literal: String::from(token_as_str)
+                "*" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::ASTERISK.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "-" => token::Token{
-                    token: token::MINUS.to_owned(),
-                    literal: String::from(token_as_str)
+                "-" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::MINUS.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "/" => token::Token{
-                    token: token::SLASH.to_owned(),
-                    literal: String::from(token_as_str)
+                "/" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::SLASH.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "<" => token::Token{
-                    token: token::LT.to_owned(),
-                    literal: String::from(token_as_str)
+                "<" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::LT.to_owned(),
+                        literal: String::from(token_as_str)
+                        }
                 },
-                ">" => token::Token{
-                    token: token::GT.to_owned(),
-                    literal: String::from(token_as_str)
+                ">" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::GT.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "," => token::Token{
-                    token: token::COMMA.to_owned(),
-                    literal: String::from(token_as_str)
+                "," => {
+                        self.read_char();
+                        token::Token{
+                        token: token::COMMA.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                ";" => token::Token{
-                    token: token::SEMICOLON.to_owned(),
-                    literal: String::from(token_as_str)
+                ";" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::SEMICOLON.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "(" => token::Token{
-                    token: token::LPAREN.to_owned(),
-                    literal: String::from(token_as_str)
+                "(" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::LPAREN.to_owned(),
+                        literal: String::from(token_as_str)
+                        }
                 },
-                ")" => token::Token{
-                    token: token::RPAREN.to_owned(),
-                    literal: String::from(token_as_str)
+                ")" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::RPAREN.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
-                "{" => token::Token{
+                "{" => {
+                    self.read_char();
+                    token::Token{
                     token: token::LBRACE.to_owned(),
                     literal: String::from(token_as_str)
+                    }
                 },
-                "}" => token::Token{
-                    token: token::RBRACE.to_owned(),
-                    literal: String::from(token_as_str)
+                "}" => {
+                        self.read_char();
+                        token::Token{
+                        token: token::RBRACE.to_owned(),
+                        literal: String::from(token_as_str)
+                    }
                 },
                 "\u{0}" => token::Token{
                     token: token::EOF.to_owned(),

@@ -14,6 +14,5 @@ fn main(){
             }
             println!("{:?}", tok);
         }
-        // println!("{:?}", lexer.next_token())
     }
 }
