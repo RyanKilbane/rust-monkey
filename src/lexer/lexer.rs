@@ -158,6 +158,7 @@ pub mod lexer{
 
                     }
                     else{
+                        self.read_char();
                         token::Token{
                             token: token::ILLEGAL.to_owned(),
                             literal: String::from(token_as_str)
