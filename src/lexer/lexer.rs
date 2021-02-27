@@ -34,8 +34,6 @@ pub mod lexer{
             // There's a major bug when working with the REPL. I think it's because when given a token to match
             // such as =, (, ), etc. we don't change the char.
             self.skip_whitespace();
-            println!("position: {}", self.position.unwrap());
-            println!("read position: {}", self.read_position.unwrap());
             let current_token = self.chr.unwrap();
             let token_as_str = str::from_utf8(&[current_token]).unwrap().to_owned();
             let borw_token = &*token_as_str;
@@ -240,7 +238,7 @@ pub mod lexer{
 
                 assert_eq!(expected.token, next_tok.token);
                 assert_eq!(expected.literal, next_tok.literal);
-                lexer.read_char();
+                // lexer.read_char();
             }
             let next_tok = lexer.next_token();
             println!("{:?}", next_tok);
@@ -296,17 +294,17 @@ pub mod lexer{
 
             assert_eq!(token::FUNCTION, next_tok.token);
             assert_eq!("fn", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
             assert_eq!("add", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::LPAREN, next_tok.token);
             assert_eq!("(", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
@@ -315,7 +313,7 @@ pub mod lexer{
             let next_tok = lexer.next_token();
             assert_eq!(token::COMMA, next_tok.token);
             assert_eq!(",", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
@@ -324,24 +322,24 @@ pub mod lexer{
             let next_tok = lexer.next_token();
             assert_eq!(token::RPAREN, next_tok.token);
             assert_eq!(")", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::LBRACE, next_tok.token);
             assert_eq!("{", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
 
             let next_tok = lexer.next_token();
             assert_eq!(token::RBRACE, next_tok.token);
             assert_eq!("}", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
 
             let next_tok = lexer.next_token();
             assert_eq!(token::EOF, next_tok.token);
             assert_eq!("\u{0}", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
         }
 
         #[test]
@@ -352,17 +350,17 @@ pub mod lexer{
 
             assert_eq!(token::FUNCTION, next_tok.token);
             assert_eq!("fn", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
             assert_eq!("add", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::LPAREN, next_tok.token);
             assert_eq!("(", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
@@ -371,7 +369,7 @@ pub mod lexer{
             let next_tok = lexer.next_token();
             assert_eq!(token::COMMA, next_tok.token);
             assert_eq!(",", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::IDENT, next_tok.token);
@@ -380,24 +378,24 @@ pub mod lexer{
             let next_tok = lexer.next_token();
             assert_eq!(token::RPAREN, next_tok.token);
             assert_eq!(")", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
             let next_tok = lexer.next_token();
             assert_eq!(token::LBRACE, next_tok.token);
             assert_eq!("{", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
 
             let next_tok = lexer.next_token();
             assert_eq!(token::RBRACE, next_tok.token);
             assert_eq!("}", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
 
 
             let next_tok = lexer.next_token();
             assert_eq!(token::EOF, next_tok.token);
             assert_eq!("\u{0}", next_tok.literal);
-            lexer.read_char();
+            //lexer.read_char();
         }
 
         #[test]
@@ -425,7 +423,7 @@ pub mod lexer{
 
                 assert_eq!(expected.token, next_tok.token);
                 assert_eq!(expected.literal, next_tok.literal);
-                lexer.read_char();
+                //lexer.read_char();
             }
             let next_tok = lexer.next_token();
             println!("{:?}", next_tok);
