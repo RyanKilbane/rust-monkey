@@ -1,5 +1,4 @@
 pub mod repl{
-    use crate::lexer;
     use std::io::{self, Write};
 
     pub fn repl_fun() -> String{
