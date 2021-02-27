@@ -1,6 +1,9 @@
 #[path="token/token.rs"] mod token;
 #[path="lexer/lexer.rs"] mod lexer;
 #[path="repl/repl.rs"] mod repl;
+#[path="parser/ast.rs"] mod ast;
+#[path="parser/parser.rs"] mod parser;
+
 use repl::repl::repl_fun;
 use lexer::lexer::Lexer;
 fn main(){
