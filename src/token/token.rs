@@ -54,4 +54,34 @@ pub mod token{
 
     }
 
+    pub struct LetStatement{
+        pub token: Token
+    }
+
+    impl LetStatement{
+        pub fn statement_node(&self){
+
+        }
+    
+        pub fn token_literal(&self) -> &str{
+            &self.token.token
+        }
+
+    }
+
+    pub struct Identifier{
+        pub token: Token,
+        pub value: String
+    }
+
+    impl Identifier{
+        pub fn expression_node(&mut self){
+
+        }
+
+        pub fn token_literal(&self) -> &str{
+            &self.token.token
+        }
+    }
+
 }
