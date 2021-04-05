@@ -1,15 +1,14 @@
 pub mod ast{
     use crate::token::*;
-    trait Node{
+
+    trait Statement{
+        fn statement_node(&mut self) -> &str;
         fn token_literal(&mut self) -> &str;
     }
 
-    trait Statement: Node{
-        fn statement_node(&mut self) -> &str;
-    }
-
-    trait Expression: Node{
-        fn expression_node(&mut self);
+    trait Expression{
+        fn expression_node(&mut self) -> &str;
+        fn token_literal(&mut self) -> &str;
     }
 
     pub struct AST{
@@ -40,15 +39,13 @@ pub mod ast{
         pub name: Identifier
     }
 
-    impl LetStatement{
-        pub fn statement_node(&self){
-
+    impl Statement for LetStatement{
+        fn statement_node(&mut self) -> &str{
+            ""
         }
-    
-        pub fn token_literal(&self) -> &str{
-            &self.token.token
+        fn token_literal(&mut self) -> &str{
+            ""
         }
-
     }
 
     pub struct Identifier{
