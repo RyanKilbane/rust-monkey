@@ -12,7 +12,7 @@ pub mod ast{
         fn expression_node(&mut self);
     }
 
-    struct AST{
+    pub struct AST{
         s: Vec<Box<dyn Statement>>
     }
 
@@ -24,7 +24,7 @@ pub mod ast{
         }
         fn token_literal(&mut self) -> &str{
             if self.s.len() > 0{
-                 self.s[0].statement_node()
+                 self.s[0].token_literal()
             }
             else{
                 ""

@@ -55,7 +55,8 @@ pub mod token{
     }
 
     pub struct LetStatement{
-        pub token: Token
+        pub token: Token,
+        pub name: Identifier
     }
 
     impl LetStatement{

@@ -31,8 +31,6 @@ pub mod lexer{
         }
 
         pub fn next_token(&mut self) -> token::Token{
-            // There's a major bug when working with the REPL. I think it's because when given a token to match
-            // such as =, (, ), etc. we don't change the char.
             self.skip_whitespace();
             let current_token = self.chr.unwrap();
             let token_as_str = str::from_utf8(&[current_token]).unwrap().to_owned();
@@ -194,10 +192,6 @@ pub mod lexer{
 
         fn read_ident(&mut self) -> String{
             let position = self.position.unwrap() as usize;
-            // TODO (BUG FIX): Notice that given a 2 char word read_char will be called twice
-            // we only want it to be called once so that on the final call, the current read
-            // possition will be on the final letter in the char, ie. we want it to be called 
-            // len - 1 times
             while Lexer::is_letter(&self.chr.unwrap()){
                 self.read_char()
             }
