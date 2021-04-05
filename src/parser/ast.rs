@@ -48,6 +48,16 @@ pub mod ast{
         }
     }
 
+    impl Expression for LetStatement{
+        fn expression_node(&mut self) -> &str{
+            ""
+        }
+        
+        fn token_literal(&mut self) -> &str{
+            ""
+        }
+    }
+
     pub struct Identifier{
         pub token: token::Token,
         pub value: String
