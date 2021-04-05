@@ -138,6 +138,14 @@ pub mod lexer{
                     token: token::EOF.to_owned(),
                     literal: String::from(token_as_str)
                 },
+                "\n" =>{
+                    self.read_char();
+                    self.next_token()
+                },
+                "\t" => {
+                    self.read_char();
+                    self.next_token()
+                },
                 _ => {
                     if Lexer::is_letter(&current_token){
                         let x = self.read_ident();
@@ -425,5 +433,62 @@ pub mod lexer{
             assert_eq!("\u{0}", next_tok.literal)
         }
 
+    }
+
+    #[test]
+    fn test_new_line() {
+        let input = "fn add\n\t{\n\t x = 10,\n\t y=20};";
+        let mut lexer = Lexer::new(input);
+        let next_tok = lexer.next_token();
+        assert_eq!(token::FUNCTION, next_tok.token);
+        assert_eq!("fn", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::IDENT, next_tok.token);
+        assert_eq!("add", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::LBRACE, next_tok.token);
+        assert_eq!("{", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::IDENT, next_tok.token);
+        assert_eq!("x", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::ASSIGN, next_tok.token);
+        assert_eq!("=", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::INT, next_tok.token);
+        assert_eq!("10", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::COMMA, next_tok.token);
+        assert_eq!(",", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::IDENT, next_tok.token);
+        assert_eq!("y", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::ASSIGN, next_tok.token);
+        assert_eq!("=", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::INT, next_tok.token);
+        assert_eq!("20", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::RBRACE, next_tok.token);
+        assert_eq!("}", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::SEMICOLON, next_tok.token);
+        assert_eq!(";", next_tok.literal);
+
+        let next_tok = lexer.next_token();
+        assert_eq!(token::EOF, next_tok.token);
+        assert_eq!("\u{0}", next_tok.literal);
     }
 }
