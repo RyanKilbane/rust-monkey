@@ -13,12 +13,15 @@ pub mod ast{
     }
 
     pub struct AST{
+    }
+
+    pub struct Program{
         s: Vec<Box<dyn Statement>>
     }
 
-    impl AST{
+    impl Program{
         pub fn new(input: token::Token) -> Self{
-            AST{
+            Program{
                 s: Vec::new()
             }
         }
@@ -29,6 +32,37 @@ pub mod ast{
             else{
                 ""
             }
+        }
+    }
+
+    pub struct LetStatement{
+        pub token: token::Token,
+        pub name: Identifier
+    }
+
+    impl LetStatement{
+        pub fn statement_node(&self){
+
+        }
+    
+        pub fn token_literal(&self) -> &str{
+            &self.token.token
+        }
+
+    }
+
+    pub struct Identifier{
+        pub token: token::Token,
+        pub value: String
+    }
+
+    impl Identifier{
+        pub fn expression_node(&mut self){
+
+        }
+
+        pub fn token_literal(&self) -> &str{
+            &self.token.token
         }
     }
 }

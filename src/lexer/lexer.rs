@@ -146,6 +146,10 @@ pub mod lexer{
                     self.read_char();
                     self.next_token()
                 },
+                " " =>{
+                    self.read_char();
+                    self.next_token()
+                },
                 _ => {
                     if Lexer::is_letter(&current_token){
                         let x = self.read_ident();
@@ -437,7 +441,7 @@ pub mod lexer{
 
     #[test]
     fn test_new_line() {
-        let input = "fn add\n\t{\n\t x = 10,\n\t y=20};";
+        let input = " fn add\n\t     {\n\t  x = 10, \n\t y=20};";
         let mut lexer = Lexer::new(input);
         let next_tok = lexer.next_token();
         assert_eq!(token::FUNCTION, next_tok.token);
