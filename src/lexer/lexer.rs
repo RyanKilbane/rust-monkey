@@ -1,5 +1,5 @@
 pub mod lexer{
-    use crate::token::*;
+    use crate::token::token::token;
     use std::str;
     #[derive(Debug)]
     pub struct Lexer<'a>{

@@ -1,12 +1,12 @@
 pub mod parser{
-    use crate::ast::ast::AST;
-    use crate::lexer::lexer::Lexer;
-    use crate::token::*;
+    use crate::parser::ast::ast::AST;
+    use crate::lexer::lexer::lexer::Lexer;
+    use crate::token::token::token::Token;
 
     struct Parser<'a>{
         l: Option<Lexer<'a>>,
-        current_token: Option<token::Token>,
-        peek_token: Option<token::Token>
+        current_token: Option<Token>,
+        peek_token: Option<Token>
     }
 
     impl<'a> Parser<'a>{

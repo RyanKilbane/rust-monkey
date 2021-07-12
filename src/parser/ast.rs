@@ -1,5 +1,5 @@
 pub mod ast{
-    use crate::token::*;
+    use crate::token::token::token::Token;
 
     trait Statement{
         fn statement_node(&mut self) -> &str;
@@ -19,7 +19,7 @@ pub mod ast{
     }
 
     impl Program{
-        pub fn new(input: token::Token) -> Self{
+        pub fn new(input: Token) -> Self{
             Program{
                 s: Vec::new()
             }
@@ -35,7 +35,7 @@ pub mod ast{
     }
 
     pub struct LetStatement{
-        pub token: token::Token,
+        pub token: Token,
         pub name: Identifier
     }
 
@@ -59,7 +59,7 @@ pub mod ast{
     }
 
     pub struct Identifier{
-        pub token: token::Token,
+        pub token: Token,
         pub value: String
     }
 

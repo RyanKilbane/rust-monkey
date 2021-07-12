@@ -1,11 +1,10 @@
-#[path="token/token.rs"] mod token;
-#[path="lexer/lexer.rs"] mod lexer;
-#[path="repl/repl.rs"] mod repl;
-#[path="parser/ast.rs"] mod ast;
-#[path="parser/parser.rs"] mod parser;
+mod token;
+mod lexer;
+mod repl;
+mod parser;
 
-use repl::repl::repl_fun;
-use lexer::lexer::Lexer;
+use repl::repl::repl::repl_fun;
+use lexer::lexer::lexer::Lexer;
 fn main(){
     loop{
         let input = repl_fun();
