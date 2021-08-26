@@ -1,5 +1,4 @@
 pub mod token{
-    use std::{ascii::AsciiExt, collections::HashMap};
 
     #[derive(Debug)]
     pub struct Token{
