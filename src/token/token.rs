@@ -1,5 +1,5 @@
 pub mod token{
-    use std::collections::HashMap;
+    use std::{ascii::AsciiExt, collections::HashMap};
 
     #[derive(Debug)]
     pub struct Token{
@@ -41,17 +41,21 @@ pub mod token{
     pub const RETURN: &str = "RETURN";
 
     pub fn ident_lookup(lookup: &str) -> String{
-        let mut keyword_map: HashMap<&str, &str> = HashMap::new();
-        keyword_map.insert("fn", FUNCTION);
-        keyword_map.insert("let", LET);
-        keyword_map.insert("return", RETURN);
-        if keyword_map.contains_key(lookup){
-            keyword_map.get(lookup).unwrap().to_owned().to_string()
-        }
-        else{
-            IDENT.to_owned().to_string()
-        }
+        match lookup{
+            "fn" => {
+                FUNCTION.to_owned()
+            },
+            "let" => {
+                LET.to_owned()
+            },
+            "return" => {
+                RETURN.to_owned()
+            },
+            _ => {
+                IDENT.to_owned()
+            }
 
+        }
     }
 
 }

@@ -1,19 +1,18 @@
 pub mod ast{
     use crate::token::token::token::Token;
 
-    trait Statement{
+    pub trait Node{
+        fn token_literal(&mut self) -> &str;
+    }
+
+    pub trait Statement: Node{
         fn statement_node(&mut self) -> &str;
-        fn token_literal(&mut self) -> &str;
     }
 
-    trait Expression{
+    pub trait Expression: Node{
         fn expression_node(&mut self) -> &str;
-        fn token_literal(&mut self) -> &str;
     }
-
-    pub struct AST{
-    }
-
+    
     pub struct Program{
         s: Vec<Box<dyn Statement>>
     }
@@ -36,24 +35,29 @@ pub mod ast{
 
     pub struct LetStatement{
         pub token: Token,
-        pub name: Identifier
+        pub name: Identifier,
+        pub value: Box<dyn Expression>
+    }
+
+    impl LetStatement{
+        fn new(token: Token, name: Identifier, value: Box<dyn Expression>) -> LetStatement{
+            LetStatement{
+                token: token,
+                name: name,
+                value: value
+            }
+        }
+    }
+
+    impl Node for LetStatement {
+        fn token_literal(&mut self) -> &str {
+            &self.token.literal
+        }
+        
     }
 
     impl Statement for LetStatement{
-        fn statement_node(&mut self) -> &str{
-            ""
-        }
-        fn token_literal(&mut self) -> &str{
-            ""
-        }
-    }
-
-    impl Expression for LetStatement{
-        fn expression_node(&mut self) -> &str{
-            ""
-        }
-        
-        fn token_literal(&mut self) -> &str{
+        fn statement_node(&mut self) -> &str {
             ""
         }
     }
@@ -71,5 +75,9 @@ pub mod ast{
         pub fn token_literal(&self) -> &str{
             &self.token.token
         }
+    }
+
+    pub struct AST{
+        
     }
 }
