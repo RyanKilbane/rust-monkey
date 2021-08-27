@@ -1,6 +1,6 @@
 pub mod token{
 
-    #[derive(Debug)]
+    #[derive(Debug, Clone)]
     pub struct Token{
         pub token: String,
         pub literal: String
