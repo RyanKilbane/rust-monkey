@@ -1,4 +1,6 @@
 pub mod ast{
+    use std::rc::Rc;
+
     use crate::token::token::token::Token;
 
     pub trait Node{
@@ -9,16 +11,16 @@ pub mod ast{
         fn statement_node(&mut self) -> &str;
     }
 
-    pub trait Expression: Node{
+    pub trait TExpression: Node{
         fn expression_node(&mut self) -> &str;
     }
     
     pub struct Program{
-        s: Vec<Box<dyn Statement>>
+        pub s: Vec<Box<dyn Statement>>
     }
 
     impl Program{
-        pub fn new(input: Token) -> Self{
+        pub fn new() -> Self{
             Program{
                 s: Vec::new()
             }
@@ -32,15 +34,15 @@ pub mod ast{
             }
         }
     }
-
+    #[derive(Clone)]
     pub struct LetStatement{
         pub token: Token,
         pub name: Identifier,
-        pub value: Box<dyn Expression>
+        pub value: Rc<dyn TExpression>
     }
 
     impl LetStatement{
-        fn new(token: Token, name: Identifier, value: Box<dyn Expression>) -> LetStatement{
+        pub fn new(token: Token, name: Identifier, value: Rc<dyn TExpression>) -> LetStatement{
             LetStatement{
                 token: token,
                 name: name,
@@ -61,7 +63,7 @@ pub mod ast{
             ""
         }
     }
-
+    #[derive(Clone)]
     pub struct Identifier{
         pub token: Token,
         pub value: String
@@ -74,6 +76,45 @@ pub mod ast{
 
         pub fn token_literal(&self) -> &str{
             &self.token.token
+        }
+
+        pub fn new(token: Token, value: String) -> Self{
+            Identifier{
+                token: token,
+                value: value
+            }
+        }
+    }
+
+    pub struct Expression{
+        expression: Vec<String>
+    }
+
+    impl Expression{
+        pub fn new() -> Self{
+            Expression{
+                expression: Vec::new()
+            }
+        }
+
+        pub fn add(&mut self, exp: String){
+            self.expression.push(exp);
+        }
+    }
+
+    impl TExpression for Expression{
+        fn expression_node(&mut self) -> &str {
+            ""
+        }
+
+    }
+
+    impl Node for Expression{
+        fn token_literal(&mut self) -> &str {
+            for exps in self.expression.iter(){
+                println!("{}", exps);
+            }
+            ""
         }
     }
 

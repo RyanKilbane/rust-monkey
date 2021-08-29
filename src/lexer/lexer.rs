@@ -1,7 +1,7 @@
 pub mod lexer{
     use crate::token::token::token;
     use std::str;
-    #[derive(Debug)]
+    #[derive(Debug, Clone)]
     pub struct Lexer<'a>{
         input: Option<&'a str>,
         position: Option<u8>,
