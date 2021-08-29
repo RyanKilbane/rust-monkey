@@ -38,11 +38,11 @@ pub mod ast{
     pub struct LetStatement{
         pub token: Token,
         pub name: Identifier,
-        pub value: Rc<dyn TExpression>
+        pub value: Rc<Expression>
     }
 
     impl LetStatement{
-        pub fn new(token: Token, name: Identifier, value: Rc<dyn TExpression>) -> LetStatement{
+        pub fn new(token: Token, name: Identifier, value: Rc<Expression>) -> LetStatement{
             LetStatement{
                 token: token,
                 name: name,
@@ -86,8 +86,9 @@ pub mod ast{
         }
     }
 
+
     pub struct Expression{
-        expression: Vec<String>
+        pub expression: Vec<String>,
     }
 
     impl Expression{

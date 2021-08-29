@@ -3,7 +3,7 @@ pub mod parser{
     use crate::lexer::lexer::lexer::Lexer;
     use crate::token::token::token::{EOF, LET, Token};
     use std::rc::Rc;
-    
+
     #[derive(Clone)]
     struct Parser<'a>{
         l: Lexer<'a>,
@@ -72,7 +72,8 @@ pub mod parser{
                 if cur_toke.as_ref().unwrap().token == ";"{
                     break
                 }
-                expression.add(cur_toke.unwrap().literal)
+                expression.add(cur_toke.unwrap().literal);
+                self.next_token();
 
             }
             LetStatement::new(let_token.unwrap(), ident, Rc::new(expression))
@@ -116,7 +117,15 @@ pub mod parser{
 
         #[test]
         fn test_parse_let_statement(){
-            
+            let stmt = "let x = 5 + 5;";
+            let l = Lexer::new(stmt);
+            let mut parser = Parser::new( l);
+            parser.init_tokens();
+            let let_stmt = parser.parse_statement().unwrap();
+            assert_eq!(let_stmt.name.value, "x");
+            assert_eq!(let_stmt.value.expression.get(0).unwrap(), "5");
+            assert_eq!(let_stmt.value.expression.get(1).unwrap(), "+");
+            assert_eq!(let_stmt.value.expression.get(2).unwrap(), "5");
         }
 
     }
